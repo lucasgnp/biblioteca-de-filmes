@@ -11,7 +11,7 @@ typedef struct
   char senha[15];
 }Usuario;
 
-struct Usuario usuarios[999];
+Usuario usuarios[999];
 int quantidade_usuarios;
 
 void removeQuebraLinha(char *string)
@@ -38,8 +38,10 @@ void imprimeVetorUsuarios(){
     for(c=0; c < quantidade_usuarios; c++){
         printf("-----------------------------------\n");
         printf("(%d)\n", c+1);
-        printf("Nome  = %s\n", usuarios[c].nome);
-        printf("Idade = %d\n", usuarios[c].idade);
+        printf("Nome: %s\n", usuarios[c].nome);
+        printf("Idade: %d\n", usuarios[c].idade);
+        printf("E-mail: %s\n", usuarios[c].email);
+        printf("Login: %s\n", usuarios[c].login);
     }
 }
 
@@ -63,13 +65,10 @@ void imprimeVetorUsuarios(){
 
 void insereNovoUsuario()
 {
-  struct Usuario u;
+  Usuario u;
 
   printf("\nNome: ");
-  leString(u.nome, 20);
-
-  printf("Idade: ");
-  scanf("%d", &u.idade);
+  fgets(u.email, 30, stdin);
 
   printf("E-mail: ");
   leString(u.email, 30);
@@ -80,7 +79,17 @@ void insereNovoUsuario()
   printf("Senha: ");
   leString(u.senha, 15);
 
+  printf("Idade: ");
+  scanf("%d", &u.idade);
+
   usuarios[quantidade_usuarios] = u;
 
   quantidade_usuarios++;
+}
+
+int main()
+{
+  insereNovoUsuario();
+
+  imprimeVetorUsuarios();
 }
