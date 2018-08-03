@@ -9,10 +9,20 @@ typedef struct
   char email[30];
   char login[15];
   char senha[15];
+  char confirm_senha[15];
 }Usuario;
 
 Usuario usuarios[999];
 int quantidade_usuarios;
+
+void removeQuebraLinha(char *string); //pronta
+void leString(char *string_destino, int quantidade_caracteres); //pronta
+void imprimeVetorUsuarios(); //pronta
+void confirmaSenhaUsuario(); //pronta
+void insereNovoUsuario(); //pronta
+void buscarUsuario();
+void editarUsuario();
+
 
 void removeQuebraLinha(char *string)
 {
@@ -45,23 +55,33 @@ void imprimeVetorUsuarios(){
     }
 }
 
-/*void escondeSenha()
+void confirmaSenhaUsuario()
 {
-  do{
-      c=getch();
-      if(isprint(c))  //Analisa se o valor da variável c é imprimivel
-      {       
-      cadastro_senha[a]=c;  //Se for, armazena o caractere 
-      a++;
-      printf("*");          //imprime o * Anterisco
-      }
-           else if(c==8&&a){     //8 é o caractere BackSpace na tabela ASCII, && a analisa se a é diferente de 0
-           cadastro_senha[a]='\0';
-           a--;
-           printf("\b \b");       //Apagando o caractere digitado
-           } 
-       }while(c!=13);             //13 é o valor de ENTER na tabela ASCII
-}*/
+  Usuario u;
+  int i, cont;
+
+  printf("Senha: ");
+  leString(u.senha, 15);
+
+  printf("Confirme sua senha: ");
+  leString(u.confirm_senha, 15);
+
+  if(strcmp(u.senha, u.confirm_senha) == 0)
+  {
+    printf("Senhas coincidem!\n");
+  }
+  else
+  {
+    do
+    {
+      printf("\nSenhas não coincidem!\n");
+      printf("Confirme novamente: ");
+      leString(u.confirm_senha, 15);
+
+    }while(strcmp(u.senha, u.confirm_senha) != 0);
+    printf("\nSenha Confirmada!\n");
+  }
+}
 
 void insereNovoUsuario()
 {
@@ -76,8 +96,7 @@ void insereNovoUsuario()
   printf("Login: ");
   leString(u.login, 15);
 
-  printf("Senha: ");
-  leString(u.senha, 15);
+  confirmaSenhaUsuario();
 
   printf("Idade: ");
   scanf("%d", &u.idade);
@@ -87,9 +106,27 @@ void insereNovoUsuario()
   quantidade_usuarios++;
 }
 
+int buscarUsuario
+
+/*void editarUsuario()
+{
+  Usuario u;
+  //pesquisar usuario
+  //se okay dar opcoes de edicao
+  //se nao imprimir mensagem de erro e solicitar nova pesquisa
+
+  //menu edicao
+  printf("-----------------------------------\n");
+  printf("Qual dado você deseja editar: \n\n");
+  printf("1 - Nome\n");
+  printf("2 - Idade\n");
+  printf("3 - E-mail\n");
+  printf("4 - Login\n");
+  printf("5 - Senha\n");
+
+}*/
+
 int main()
 {
   insereNovoUsuario();
-
-  imprimeVetorUsuarios();
 }
